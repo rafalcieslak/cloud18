@@ -1,0 +1,21 @@
+---
+# tasks file for nginx
+
+- name: Ensure apache is not installed
+  apt:
+    name: apache2
+    state: absent
+  tags: [http_server, packages]
+- name: Ensure nginx is present or install it
+  apt:
+    name: nginx
+    state: installed
+    update_cache: true
+  tags: [http_server, packages]
+- name: Install nginx site config
+  copy:
+    src: site.conf
+    dest: /etc/nginx/conf.d/site.conf
+  tags: [http_server, system_config]
+  notify:
+   - Restart Nginx

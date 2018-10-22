@@ -1,0 +1,25 @@
+- hosts: server1
+  become: yes
+  tasks:
+    - include_role:
+        name: nginx
+    - include_role:
+        name: website
+    - include_role:
+        name: users
+      vars:
+        users_list:
+         - name: admin
+           password: g3wo5cwAgkkx
+         - name: AzureDiamond
+           password: hunter2
+
+# Role muszą być dostępne w katalogu `roles`. Każda rola ma własny podkatalog o
+# nazwie takiej, jak nazwa roli. Wewnątrz znajduje się komplet katalogów o
+# konretnych znaczeniach: np. `tasks` zawiera pliki .yml z zadaniami, które ta
+# rola obejmuje, `handlers` zawiera listę handlerów, `defaults` podaje domyślne
+# wartości zmiennych w obrębie tej roli.
+# Aby przygotować strukturę katalogów roli użyłem polecenia:
+#  ansible-galaxy init NAZWA_ROLI
+# które tworzy "pustą" rolę, przygotowując pliki gotowe by je wypełnić treścią.
+# Warto zwrócić uwagę, że rola `users` w moim przykładzie jest sparametryzowana.

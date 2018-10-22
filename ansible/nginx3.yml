@@ -1,0 +1,12 @@
+- hosts: server1
+  become: yes
+  tasks:
+   - name: Ensure apache is not installed
+     apt:
+       name: apache2
+       state: absent
+   - name: Ensure nginx is present or install it
+     apt:
+       name: nginx
+       state: installed
+       update_cache: true

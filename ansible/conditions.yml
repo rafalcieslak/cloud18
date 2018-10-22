@@ -1,0 +1,23 @@
+- hosts: server1
+  become: yes
+  tasks:
+    - name: Check total memory level
+      shell: free -m | awk '/^Mem:/{print $2}'
+      register: memory_result
+
+    - name: Prepare some variables
+      set_fact:
+        variable1: my_value
+        variable2: 12345
+        total_memory_mb: "{{ memory_result.stdout_lines[0] }}"
+      
+    - name: Some debugging stuff
+      debug:
+        var: total_memory_mb
+
+    - name: Install JRE
+      apt:
+        name: openjdk-8-jre
+        state: installed
+      when: total_memory_mb|int >= 2000
+        

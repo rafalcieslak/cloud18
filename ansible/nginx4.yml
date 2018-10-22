@@ -1,0 +1,30 @@
+- hosts: server1
+  become: yes
+  tasks:
+   - name: Ensure apache is not installed
+     apt:
+       name: apache2
+       state: absent
+   - name: Ensure nginx is present or install it
+     apt:
+       name: nginx
+       state: installed
+       update_cache: true
+   - name: Install nginx site config
+     copy:
+       src: site.conf
+       dest: /etc/nginx/conf.d/site.conf
+   - name: Restart nginx
+     service:
+       name: nginx
+       state: restarted
+   - name: Install rsync
+     apt:
+       name: rsync
+       state: installed
+   - name: Install example site
+     synchronize:
+       src: site/
+       dest: /opt/html
+       rsync_opts: --chown=www-data
+       delete: yes

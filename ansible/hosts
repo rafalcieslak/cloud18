@@ -1,0 +1,7 @@
+[server1]
+12.34.56.78  ansible_user=USER extra_variable=VALUE
+90.12.34.56  ansible_user=USER extra_variable=VALUE
+
+[another_group]
+3.4.5.6
+7.8.9.1

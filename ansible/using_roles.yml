@@ -1,0 +1,12 @@
+- hosts: server1
+  become: yes
+  roles:
+    - nginx
+    - website
+    - users
+
+# To jest starszy sposób załączania ról, niezalecany od Ansible 2.3. Głowny
+# problem brał się stąd, że w jednym playbooku można zamieścić zarówno listę
+# ról, jak i tasków - i wtedy jest niejasne, w jakiej kolejnosci mają zostać
+# wykonane. Z tej przyczyny prowadzono nowy styl, który demonstruję w pliku
+# using_roles2.yml...

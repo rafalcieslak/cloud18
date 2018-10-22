@@ -1,0 +1,14 @@
+---
+# tasks file for users
+
+- debug:
+    var: users_list
+  tags: [users]
+
+- name: Prepare some users
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    state: present
+  with_items: "{{ users_list }}"
+  tags: [users]
