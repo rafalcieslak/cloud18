@@ -18,6 +18,6 @@
     - name: Install JRE
       apt:
         name: openjdk-8-jre
-        state: installed
+        state: present
       when: total_memory_mb|int >= 2000
         

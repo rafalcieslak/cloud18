@@ -2,4 +2,4 @@
   become: yes
   tasks:
    - name: Ensure nginx is present or install it
-     apt: name=nginx state=installed update_cache=true
+     apt: name=nginx state=present update_cache=true

@@ -4,7 +4,7 @@
 - name: Ensure rsync is installed
   apt:
     name: rsync
-    state: installed
+    state: present
   tags: [website, packages]
 - name: Upload example site
   synchronize:

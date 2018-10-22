@@ -9,7 +9,7 @@
    - name: Ensure nginx is present or install it
      apt:
        name: nginx
-       state: installed
+       state: present
        update_cache: true
      tags: [http_server, packages]
    - name: Install nginx site config
@@ -25,7 +25,7 @@
    - name: Install rsync
      apt:
        name: rsync
-       state: installed
+       state: present
      tags: [website, packages]
    - name: Install example site
      synchronize:

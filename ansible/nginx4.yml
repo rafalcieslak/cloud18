@@ -8,7 +8,7 @@
    - name: Ensure nginx is present or install it
      apt:
        name: nginx
-       state: installed
+       state: present
        update_cache: true
    - name: Install nginx site config
      copy:
@@ -21,7 +21,7 @@
    - name: Install rsync
      apt:
        name: rsync
-       state: installed
+       state: present
    - name: Install example site
      synchronize:
        src: site/
