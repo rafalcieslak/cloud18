@@ -1,0 +1,59 @@
+{
+    "family": "my-example-task",
+    "containerDefinitions": [
+        {
+            "name": "nginx-server", 
+            "image": "nginx", 
+            "cpu": 128, 
+            "memory": 256, 
+            "links": [
+                "name:php-server"
+            ], 
+            "portMappings": [
+                {
+                    "containerPort": 80, 
+                    "hostPort": 80, 
+                    "protocol": "tcp"
+                }
+            ], 
+            "essential": true,
+            "environment": [
+                { "name": "KEY1", "value": "VALUE1" }
+                { "name": "KEY2", "value": "VALUE2" }
+            ], 
+            "mountPoints": [
+                {
+                    "sourceVolume": "example-shared-volume", 
+                    "containerPath": "/mnt/data"
+                }
+            ]
+        },
+        {
+            "name": "php-server", 
+            "image": "php", 
+            "cpu": 256, 
+            "memory": 1024, 
+            "essential": true,
+            "mountPoints": [
+                {
+                    "sourceVolume": "example-shared-volume", 
+                    "containerPath": "/mnt/data"
+                }
+            ]
+        }
+    ], 
+    "volumes": [
+        {
+            "name": "example-shared-volume", 
+            "host": {
+                "sourcePath": "/data/volume"
+            }
+        }
+    ], 
+    "placementConstraints": [
+        {
+            "type": "memberOf",
+            "expression": "attribute:ecs.availability-zone in [us-east-1a, us-east-1b]"
+        }
+    ]
+}
